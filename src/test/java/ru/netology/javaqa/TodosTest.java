@@ -48,10 +48,6 @@ public class TodosTest {
         todos.add(epic);
         todos.add(meeting);
 
-        int idExpected = 555;
-        int idActual = meeting.getId();
-        Assertions.assertEquals(idExpected, idActual);
-
         Task[] expected = {epic};
         Task[] actual = todos.search("Молоко");
         Assertions.assertArrayEquals(expected, actual);

@@ -78,7 +78,7 @@ public class TodosTest {
     public void shouldFoundSomeTasks() { //поиск нескольких задач
         SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям вечером в четверг");
 
-        String[] subtasks = {"Молоко", "Яйца", "Хлеб", "Сырок \"Мутный четверг\""};
+        String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
         Epic epic = new Epic(55, subtasks);
 
         Meeting meeting = new Meeting(
@@ -93,8 +93,9 @@ public class TodosTest {
         todos.add(epic);
         todos.add(meeting);
 
-        Task[] task = todos.search("четверг");
-        Assertions.assertEquals(3, task.length);
+        Task[] actual = todos.search("четверг");
+        Task[] expected = {simpleTask, meeting};
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
@@ -116,8 +117,9 @@ public class TodosTest {
         todos.add(epic);
         todos.add(meeting);
 
-        Task[] task = todos.search("вторник");
-        Assertions.assertEquals(1, task.length);
+        Task[] actual = todos.search("Хлеб");
+        Task[] expected = {epic};
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
@@ -139,8 +141,9 @@ public class TodosTest {
         todos.add(epic);
         todos.add(meeting);
 
-        Task[] task = todos.search("На чай к родителям");
-        Assertions.assertEquals(0, task.length);
+        Task[] actual = todos.search("На чай к родителям");
+        Task[] expected = {};
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
